@@ -7,8 +7,6 @@ import {
   TouchableNativeFeedback,
 } from "react-native";
 
-import Colors from "../../constants/Colors";
-
 const ProductItem = (props) => {
   return (
     <TouchableNativeFeedback onPress={props.onSelect} useForeground>
