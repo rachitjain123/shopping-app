@@ -1,8 +1,14 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const CartItem = (props) => {
+const CartItem = props => {
   return (
     <View style={styles.cartItem}>
       <View style={styles.itemData}>
@@ -16,7 +22,11 @@ const CartItem = (props) => {
             onPress={props.onRemove}
             style={styles.deleteButton}
           >
-            <Ionicons name="md-trash" size={23} color="red" />
+            <Ionicons
+              name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
+              size={23}
+              color="red"
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -27,24 +37,27 @@ const CartItem = (props) => {
 const styles = StyleSheet.create({
   cartItem: {
     padding: 10,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: 20,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 20
   },
   itemData: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   quantity: {
-    color: "#888",
-    fontSize: 16,
+    fontFamily: 'open-sans',
+    color: '#888',
+    fontSize: 16
   },
   mainText: {
-    fontSize: 16,
+    fontFamily: 'open-sans-bold',
+    fontSize: 16
   },
   deleteButton: {
-    marginLeft: 20,
-  },
+    marginLeft: 20
+  }
 });
+
 export default CartItem;

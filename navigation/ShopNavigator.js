@@ -2,9 +2,10 @@ import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
+import { Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import ProductsOverViewScreen from "../screens/shop/ProductsOverviewScreen";
+import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
 import CartScreen from "../screens/shop/CartScreen";
 import OrdersScreen from "../screens/shop/OrdersScreen";
@@ -12,24 +13,36 @@ import UserProductsScreen from "../screens/user/UserProductsScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
 import Colors from "../constants/Colors";
 
+const defaultNavOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
+  },
+  headerTitleStyle: {
+    fontFamily: "open-sans-bold",
+  },
+  headerBackTitleStyle: {
+    fontFamily: "open-sans",
+  },
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
+};
+
 const ProductsNavigator = createStackNavigator(
   {
-    ProductsOverView: ProductsOverViewScreen,
+    ProductsOverview: ProductsOverviewScreen,
     ProductDetail: ProductDetailScreen,
     Cart: CartScreen,
   },
   {
     navigationOptions: {
       drawerIcon: (drawerConfig) => (
-        <Ionicons name="md-cart" size={23} color={drawerConfig.tintColor} />
+        <Ionicons
+          name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
       ),
     },
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: "white",
-    },
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -40,15 +53,14 @@ const OrdersNavigator = createStackNavigator(
   {
     navigationOptions: {
       drawerIcon: (drawerConfig) => (
-        <Ionicons name="md-list" size={23} color={drawerConfig.tintColor} />
+        <Ionicons
+          name={Platform.OS === "android" ? "md-list" : "ios-list"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
       ),
     },
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: "white",
-    },
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -60,15 +72,14 @@ const AdminNavigator = createStackNavigator(
   {
     navigationOptions: {
       drawerIcon: (drawerConfig) => (
-        <Ionicons name="md-create" size={23} color={drawerConfig.tintColor} />
+        <Ionicons
+          name={Platform.OS === "android" ? "md-create" : "ios-create"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
       ),
     },
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: "white",
-    },
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
